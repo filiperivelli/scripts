@@ -5,4 +5,6 @@
 ::Cria o diretorio Girado caso nao exista
 for %%i in (%*) do if not exist  %%~piGirado\ (mkdir %%~piGirado\)
 ::Executa o ffmpeg para criar novos arquivos girados dentro da pasta Girado
-for %%i in (%*) do ffmpeg -i %%i -map_metadata 0 -metadata:s:v rotate="90" -codec copy %%~piGirado\%%~ni%%~xi
+::O codec h264_nvenc deve ser utilizado com aceleradoras Nvidia
+for %%i in (%*) do ffmpeg -i %%i -filter:v transpose=3 -vcodec h264_nvenc %%~piGirado\%%~ni%%~xi
+pause
