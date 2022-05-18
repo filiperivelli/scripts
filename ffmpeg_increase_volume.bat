@@ -4,7 +4,7 @@
 ::Os arquivos de vídeo devem ser arrastados para o ícone desse script
 @echo off
 ::Cria o diretorio Volume
-for %%i in (%*) do if not exist  %%~piVolume\ (mkdir %%~piVolume\)
+for %%i in (%*) do if not exist  .\Volume\ (mkdir .\Volume\)
 ::Executa o ffmpeg para criar novos arquivos com volume mais alto dentro da pasta Volume
 for %%i in (%*) do ffmpeg -i %%i -filter:a "volume=1.5"  -vcodec copy ".\Volume\%%~ni%%~xi"
 pause
