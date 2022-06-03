@@ -7,5 +7,5 @@ https://superuser.com/questions/1380946/how-do-i-convert-10-bit-h-265-hevc-video
 '
 for var in "$@"
 do
-    ffmpeg -i "$var" -map 0 -c:v libx265 -crf 20 -vf format=yuv420p -c:a copy "$var".mkv
+    ffmpeg -hwaccel cuda -i "$var" -c:v h264_nvenc -pix_fmt yuv420p -preset slow -rc constqp/cbr/vbr -b:v 8M -maxrate:v 10M -c:a aac -b:a 224k ./h264/"$var"
 done
